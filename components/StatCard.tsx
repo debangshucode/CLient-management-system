@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/card';
 interface StatCardProps {
   title: string;
   value: string | number;
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   change?: {
     value: number;
     trend: 'up' | 'down';
