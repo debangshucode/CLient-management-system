@@ -1,13 +1,16 @@
 import { useState } from "react"
 import axios from "@/utils/axios"
 import { toast } from "sonner"
+import { useRouter } from "next/navigation" // add this import
 
 interface Props {
   onClose: () => void
   onSuccess: () => void
 }
 
+
 export default function LoginRegisterModal({ onClose, onSuccess }: Props) {
+  const router = useRouter() // initialize router
   const [isLogin, setIsLogin] = useState(true)
   const [data, setData] = useState({ name: "", email: "", password: "" })
   const [error, setError] = useState("")
@@ -23,6 +26,11 @@ export default function LoginRegisterModal({ onClose, onSuccess }: Props) {
       const msg = res.data?.message?.toLowerCase() || ""
 
       if (msg.includes("login successful")) {
+        const role = res.data?.user?.role // assuming backend returns user role
+        if (role !== "admin" && role !== "subadmin") {
+          router.push("/unauthorized") // redirect to unauthorized page
+          return
+        }
         toast.success("Login successful")
         onSuccess()
       } else if (msg.includes("registered")) {

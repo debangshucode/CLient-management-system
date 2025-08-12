@@ -9,7 +9,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
    const user = getUserFromToken(request)
-  if (!user || user.role !== "admin") {
+  if (!user || (user.role !== "admin" && user.role !== "subadmin")) {
+
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   try {
@@ -37,7 +38,8 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
    const user = getUserFromToken(request)
-  if (!user || user.role !== "admin") {
+  if (!user || (user.role !== "admin" && user.role !== "subadmin")) {
+
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   try {
@@ -66,7 +68,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
    const user = getUserFromToken(request)
-  if (!user || user.role !== "admin") {
+ if (!user || (user.role !== "admin" && user.role !== "subadmin")) {
+
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   try {

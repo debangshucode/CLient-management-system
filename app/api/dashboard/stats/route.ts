@@ -8,7 +8,8 @@ import { getUserFromToken } from "@/lib/auth"
 
 export async function GET(req: NextRequest) {
   const user = getUserFromToken(req)
-  if (!user || user.role !== "admin") {
+if (!user || (user.role !== "admin" && user.role !== "subadmin")) {
+
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
   try {
