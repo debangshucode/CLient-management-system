@@ -5,17 +5,15 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import AboutSection from '@/components/About';
 import Hero from '@/components/Hero';
-import AuthButton from '@/components/ui/AuthButton';
 import {FeaturesSectionDemo} from '@/components/features';
 import { ArrowRight } from 'lucide-react';
 import { BentoGridThirdDemo } from '@/components/bento-grid';
-
+import FloatingNav from '@/components/floating_nav';
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black">
-      {/* Navigation */}
      
-      <AuthButton />
+      <FloatingNav />
       <Hero />
       {/* About Section */}
       <AboutSection />
@@ -52,10 +50,10 @@ export default function Home() {
               <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
                 <span className="text-white font-bold text-xs">DG</span>
               </div>
-              <span className="text-white font-medium">DreamGuys</span>
+              <span className="text-white font-medium">ClientXD</span>
             </div>
             <div className="text-gray-400 text-sm">
-              © 2025 DreamGuys. Built with Next.js and MongoDB.
+              © 2025 ClientXD. Built with Next.js and MongoDB.
             </div>
           </div>
         </div>
@@ -63,3 +61,4 @@ export default function Home() {
     </div>
   );
 }
+

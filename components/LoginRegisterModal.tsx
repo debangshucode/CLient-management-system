@@ -13,39 +13,38 @@ export default function LoginRegisterModal({ onClose, onSuccess }: Props) {
   const [error, setError] = useState("")
 
   const handleSubmit = async () => {
-  try {
-    const url = isLogin ? "/auth/login" : "/auth/register"
-    const payload = isLogin
-      ? { email: data.email, password: data.password }
-      : data
+    try {
+      const url = isLogin ? "/auth/login" : "/auth/register"
+      const payload = isLogin
+        ? { email: data.email, password: data.password }
+        : data
 
-    const res = await axios.post(url, payload, {
-      withCredentials: true,
-    })
+      const res = await axios.post(url, payload, { withCredentials: true })
+      const msg = res.data?.message?.toLowerCase() || ""
 
-    const msg = res.data?.message?.toLowerCase() || ""
-
-    if (msg.includes("login successful")) {
-      toast.success("Login successful")
-      onSuccess()
-    } else if (msg.includes("registered")) {
-      toast.success("Registered successfully. Please login.")
-      setIsLogin(true) // switch to login modal after register
-      setData({ name: "", email: "", password: "" }) // optional: reset form
-    } else {
-      toast(res.data?.message || "Success")
+      if (msg.includes("login successful")) {
+        toast.success("Login successful")
+        onSuccess()
+      } else if (msg.includes("registered")) {
+        toast.success("Registered successfully. Please login.")
+        setIsLogin(true)
+        setData({ name: "", email: "", password: "" })
+      } else {
+        toast(res.data?.message || "Success")
+      }
+    } catch (err: any) {
+      const msg = err.response?.data?.message || "Failed"
+      toast.error(msg)
+      setError(msg)
     }
-  } catch (err: any) {
-    const msg = err.response?.data?.message || "Failed"
-    toast.error(msg)
-    setError(msg)
   }
-}
-
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded w-full max-w-sm space-y-4">
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
+      style={{ backdropFilter: "blur(2px)" }}
+    >
+      <div className="bg-white p-6 rounded-lg w-full max-w-sm space-y-4 shadow-2xl transform transition-all scale-100">
         <h2 className="text-xl font-bold">{isLogin ? "Login" : "Register"}</h2>
 
         {!isLogin && (
@@ -102,3 +101,4 @@ export default function LoginRegisterModal({ onClose, onSuccess }: Props) {
     </div>
   )
 }
+

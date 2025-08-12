@@ -33,7 +33,7 @@ export default function Sidebar() {
   const SidebarContent = (
     <div className="h-full w-64 bg-gray-900 border-r border-gray-800 flex flex-col">
       <div className="flex items-center justify-between p-6 border-b border-gray-800">
-        <h1 className="text-xl font-bold text-white">DreamGuys</h1>
+        <h1 className="text-xl font-bold text-white">ClientXD</h1>
         <button
           onClick={() => setIsOpen(false)}
           className="lg:hidden p-1 rounded-md text-gray-400 hover:text-white hover:bg-gray-800"
@@ -67,7 +67,7 @@ export default function Sidebar() {
         })}
       </nav>
       <div className="p-4 border-t border-gray-800 text-center text-xs text-gray-400">
-        © 2025 DreamGuys
+        © 2025 ClientXD
       </div>
     </div>
   )
